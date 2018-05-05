@@ -17,6 +17,7 @@ namespace CSharpEducationBot
             log.Info("Запуск консоли");
 
             log.Info("Остановка консоли");
+            Console.ReadLine();
         }
     }
 }
