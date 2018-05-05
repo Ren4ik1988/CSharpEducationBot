@@ -17,7 +17,7 @@ namespace CSharpEducationBot
         {
             try
             {
-                bot = new TelegramBotClient(loadToken()); //инициализируем клиент телеграм бота
+                bot = new TelegramBotClient(readToken()); //инициализируем клиент телеграм бота
             }
             catch ( ArgumentException ex) // если файл найден, но токен имел неверный формат
             {
@@ -38,7 +38,7 @@ namespace CSharpEducationBot
             Program.log.Info("Создание экземпляра клиента... успешно");
             return true;
         }
-        private static string loadToken() //считываем строку из файла
+        private static string readToken() //считываем строку из файла
         {
             using (StreamReader read = new StreamReader(filePath))
                 return read.ReadLine();
