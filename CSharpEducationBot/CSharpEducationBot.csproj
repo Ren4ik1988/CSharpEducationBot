@@ -55,8 +55,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectionTest.cs" />
-    <Compile Include="GetToken.cs" />
+    <Compile Include="Init\CommandsListInit.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\HelloCommand.cs" />
+    <Compile Include="Init\ConnectionTest.cs" />
+    <Compile Include="Init\GetToken.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
