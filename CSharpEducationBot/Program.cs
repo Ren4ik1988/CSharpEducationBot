@@ -7,6 +7,7 @@ using NLog;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Exceptions;
+using Telegram.Bot.Args;
 
 namespace CSharpEducationBot
 {
@@ -23,8 +24,10 @@ namespace CSharpEducationBot
             if (initBot().Result)
             {
                 log.Info("Проверка завершена.");
-                //bot.StartReceiving(); запуск опроса чата
-                //to do
+
+                bot.OnMessage += Bot_OnMessage; // присваиваем событие
+
+                bot.StartReceiving(); //запуск опроса чата                
             }
             else
             {
@@ -35,6 +38,13 @@ namespace CSharpEducationBot
 
             Console.ReadLine();
             log.Info("Остановка консоли");
+        }
+
+        private static async void Bot_OnMessage(object sender, MessageEventArgs e)
+        {
+            Message msg = e.Message; // получаем сообщение
+            
+            await bot.SendTextMessageAsync(msg.Chat.Id, msg.Text);
         }
 
         //метод проверяет наличие токена, его валидность и доступность сервера, если в процессе проверки просиходит ошибка, управление 
