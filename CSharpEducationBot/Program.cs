@@ -29,7 +29,7 @@ namespace CSharpEducationBot
             if (await initBot())
             {
                 log.Info("Проверка завершена.");
-                await StartAsync();
+                await startAsync(); //запуск опроса чатов и запуск метода закрытия консоли
                                 
             }
             else
@@ -42,14 +42,15 @@ namespace CSharpEducationBot
             log.Info("Остановка консоли");
         }
 
-        private async static Task StartAsync()
+        #region Опрос чата и его завершение
+        private async static Task startAsync()
         {
             bot.OnMessage += Bot_OnMessage; // присваиваем событие
             bot.StartReceiving(); //запуск опроса чата
             await Task.Run(stopBot);
         }
 
-        private static Task stopBot()
+        private async static Task stopBot()
         {
             bool stop = false;
             while(!stop)
@@ -61,7 +62,9 @@ namespace CSharpEducationBot
                     stop = true;
                 }
             }
+            await Task.Delay(0);
         }
+        #endregion
 
         private static void Bot_OnMessage(object sender, MessageEventArgs e)
         {
