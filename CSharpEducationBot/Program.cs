@@ -22,17 +22,15 @@ namespace CSharpEducationBot
         private static List<Command> commandsList;
 
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             log.Info("Запуск консоли");
 
-            if (initBot().Result)
+            if (await initBot())
             {
                 log.Info("Проверка завершена.");
-
-                bot.OnMessage += Bot_OnMessage; // присваиваем событие
-
-                bot.StartReceiving(); //запуск опроса чата                
+                await startAsync(); //запуск опроса чатов и запуск метода закрытия консоли
+                                
             }
             else
             {
@@ -40,10 +38,33 @@ namespace CSharpEducationBot
                 Console.ReadLine();
                 Environment.Exit(0);
             }
-
-            Console.ReadLine();
+            
             log.Info("Остановка консоли");
         }
+
+        #region Опрос чата и его завершение
+        private async static Task startAsync()
+        {
+            bot.OnMessage += Bot_OnMessage; // присваиваем событие
+            bot.StartReceiving(); //запуск опроса чата
+            await Task.Run(stopBot);
+        }
+
+        private async static Task stopBot()
+        {
+            bool stop = false;
+            while(!stop)
+            {
+                string adminCommand = Console.ReadLine();
+                if(adminCommand.Equals("stop"))
+                {
+                    bot.StopReceiving();
+                    stop = true;
+                }
+            }
+            await Task.Delay(0);
+        }
+        #endregion
 
         private static void Bot_OnMessage(object sender, MessageEventArgs e)
         {
@@ -56,8 +77,8 @@ namespace CSharpEducationBot
 
         }
 
-        //метод проверяет наличие токена, его валидность и доступность сервера, если в процессе проверки просиходит ошибка, управление 
-        //данному методу не возвращается - приложение выводит на экран логи ошибок и закрывается, именно поэтому метод всегда возвращает true
+        /*метод проверяет наличие токена, его валидность и доступность сервера, если в процессе проверки просиходит ошибка, управление 
+        данному методу не возвращается - приложение выводит на экран логи ошибок и закрывается, именно поэтому метод всегда возвращает true */
         private async static Task<bool> initBot()
         {
             log.Info("Запуск проверки валидности токена и доступности сервера.");
