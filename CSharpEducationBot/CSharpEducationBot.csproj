@@ -55,6 +55,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\StartCommand.cs" />
     <Compile Include="Init\CommandsListInit.cs" />
     <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\HelloCommand.cs" />
