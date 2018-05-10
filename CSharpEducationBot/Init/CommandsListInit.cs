@@ -14,6 +14,7 @@ namespace CSharpEducationBot
         {
             commandsList = new List<Command>();
             commandsList.Add(new HelloCommand());
+            commandsList.Add(new StartCommand());
         }
     }
 }

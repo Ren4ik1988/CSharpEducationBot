@@ -47,14 +47,14 @@ namespace CSharpEducationBot.Commands
                 
                 if (ev.CallbackQuery.Data == "callback1.1")
                 {
-                    await client.EditMessageTextAsync(chatId,messageId,"блабла");
-                    await client.AnswerCallbackQueryAsync(ev.CallbackQuery.Id, "You hav choosen " + ev.CallbackQuery.Data, true);
+                    await client.EditMessageTextAsync(chatId, msg.MessageId, "блабла", replyMarkup: inlineKeyboard);                    
+                   // await client.AnswerCallbackQueryAsync(ev.CallbackQuery.Id, "You hav choosen " + ev.CallbackQuery.Data, true);
                 }
                 else
                 if (ev.CallbackQuery.Data == "callback2.2")
                 {
                     await client.SendTextMessageAsync(msg.Chat.Id, "тест", replyToMessageId: msg.MessageId);
-                    await client.AnswerCallbackQueryAsync(ev.CallbackQuery.Id); // отсылаем пустое, чтобы убрать "частики" на кнопке
+                    //await client.AnswerCallbackQueryAsync(ev.CallbackQuery.Id); // отсылаем пустое, чтобы убрать "частики" на кнопке
                 }
             };
         }
