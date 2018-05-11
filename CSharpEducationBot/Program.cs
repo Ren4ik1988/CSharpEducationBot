@@ -50,7 +50,7 @@ namespace CSharpEducationBot
             Message msg = e.Message; // получаем сообщение
 
             // поиск класса у которого поле Name совпадает с входящей командой
-            Command RunCommand = commandsList.Find(s => s.Name == msg.Text);
+            Command RunCommand = commandsList.Find(s => s.Name.ToLower().Contains(msg.Text.ToLower()));
             if (RunCommand != null)
                 RunCommand.Execute(msg, bot);
 
