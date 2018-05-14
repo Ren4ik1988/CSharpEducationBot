@@ -8,6 +8,7 @@ using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Args;
+using System.Data.SQLite;
 using CSharpEducationBot.Commands; // подключаем простанство имен, где лежат команды 
 
 namespace CSharpEducationBot
@@ -18,6 +19,8 @@ namespace CSharpEducationBot
 
         private static TelegramBotClient bot;
 
+        public static mainEntities dbConn;
+
         // список команд
         private static List<Command> commandsList;
 
@@ -25,6 +28,17 @@ namespace CSharpEducationBot
         static async Task Main(string[] args)
         {
             log.Info("Запуск консоли");
+
+            //устанавливаем связь с базой данных
+            dbConn = new mainEntities();
+            dbConn.Courses.Add(new Cours
+            {
+                Name = "Курс какой-то непонятный",
+                Url = "reference to course",
+            });
+            dbConn.SaveChanges();
+            
+
 
             if (await initBot())
             {
@@ -46,10 +60,12 @@ namespace CSharpEducationBot
         private async static Task startAsync()
         {
             bot.OnMessage += Bot_OnMessage; // присваиваем событие
+            bot.OnCallbackQuery += Bot_OnCallbackQuery;
             bot.StartReceiving(); //запуск опроса чата
             await Task.Run(stopBot);
         }
 
+        
         private async static Task stopBot()
         {
             bool stop = false;
@@ -65,6 +81,16 @@ namespace CSharpEducationBot
             await Task.Delay(0);
         }
         #endregion
+
+        private static void Bot_OnCallbackQuery(object sender, CallbackQueryEventArgs e)
+        {
+            string [] input = e.CallbackQuery.Data.Split('_');
+            Command RunCommand = commandsList.Find(s => s.Name == input[0]);
+            if(RunCommand != null)
+            {
+                RunCommand.CheckCallBack(input[1], e);
+            }
+        }
 
         private static void Bot_OnMessage(object sender, MessageEventArgs e)
         {

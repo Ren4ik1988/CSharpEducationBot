@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot;
+using Telegram.Bot.Args;
 using Telegram.Bot.Types;
 
 namespace CSharpEducationBot.Commands
@@ -18,6 +19,10 @@ namespace CSharpEducationBot.Commands
             var messageId = message.MessageId;            
 
             await client.SendTextMessageAsync(chatId, "Hello!", replyToMessageId: messageId);
+        }
+
+        internal override void CheckCallBack(string v, CallbackQueryEventArgs e)
+        {
         }
     }
 }

@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище mainModel" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=&quot;E:\Projects Git\CSharpEducationBot\CSharpEducationBot\EducationDataBase.db&quot;;to full path=True" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="Url2" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Tag" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Tag2" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Access" Type="integer" />
+          <Property Name="Author" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Year" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Rating" Type="integer" />
+          <Property Name="Downloads" Type="integer" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="Url" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+          <Property Name="Url2" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Tag" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Tag2" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Access" Type="integer" Nullable="false" />
+          <Property Name="Author" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Year" Type="nvarchar" MaxLength="2147483647" />
+          <Property Name="Rating" Type="integer" />
+          <Property Name="DownLoads" Type="integer" />
+        </EntityType>
+        <EntityContainer Name="Хранилище mainModelContainer">
+          <EntitySet Name="Books" EntityType="Self.Books" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="mainModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Url2" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Tag" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Tag2" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Access" Type="Int64" />
+          <Property Name="Author" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Rating" Type="Int64" />
+          <Property Name="Downloads" Type="Int64" />
+        </EntityType>
+        <EntityType Name="Cours">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Url2" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Tag" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Tag2" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Access" Type="Int64" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" />
+          <Property Name="Rating" Type="Int64" />
+          <Property Name="DownLoads" Type="Int64" />
+        </EntityType>
+        <EntityContainer Name="mainEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="Courses" EntityType="Self.Cours" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище mainModelContainer" CdmEntityContainer="mainEntities">
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="mainModel.Book">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Url2" ColumnName="Url2" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="Tag2" ColumnName="Tag2" />
+                <ScalarProperty Name="Access" ColumnName="Access" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Downloads" ColumnName="Downloads" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="mainModel.Cours">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Url2" ColumnName="Url2" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="Tag2" ColumnName="Tag2" />
+                <ScalarProperty Name="Access" ColumnName="Access" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="DownLoads" ColumnName="DownLoads" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

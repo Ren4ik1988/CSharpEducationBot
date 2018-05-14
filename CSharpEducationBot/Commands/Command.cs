@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
 using Telegram.Bot;
+using Telegram.Bot.Args;
 
 namespace CSharpEducationBot.Commands
 {
@@ -12,6 +13,7 @@ namespace CSharpEducationBot.Commands
     {
         public abstract string Name { get; }
 
-        public abstract void Execute(Message message, TelegramBotClient client);        
+        public abstract void Execute(Message message, TelegramBotClient client);
+        internal abstract void CheckCallBack(string v, CallbackQueryEventArgs e);
     }
 }
