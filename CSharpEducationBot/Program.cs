@@ -84,12 +84,13 @@ namespace CSharpEducationBot
 
         private static void Bot_OnCallbackQuery(object sender, CallbackQueryEventArgs e)
         {
-            string [] input = e.CallbackQuery.Data.Split('_');
+            string[] input = e.CallbackQuery.Data.Split('_');
             Command RunCommand = commandsList.Find(s => s.Name == input[0]);
-            if(RunCommand != null)
+            if (RunCommand != null)
             {
                 RunCommand.CheckCallBack(input[1], e);
             }
+
         }
 
         private static void Bot_OnMessage(object sender, MessageEventArgs e)

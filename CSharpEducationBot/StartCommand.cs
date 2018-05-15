@@ -28,14 +28,19 @@ namespace CSharpEducationBot
             button2.Text = "Курсы";
             button2.CallbackData = "/start_kurs";
 
+            var button3 = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardButton();
+            button3.Text = "Пополнить базу";
+            button3.CallbackData = "/start_newFile";
+
             var buttpons = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardButton[][]
             {
-                new []{ button1, button2 }
+                new []{ button1, button2 },
+                new []{ button3}
 
             };
 
             var reply = new Telegram.Bot.Types.ReplyMarkups.InlineKeyboardMarkup(buttpons);
-            await client.SendTextMessageAsync(chatId, "Выберите интересующую категорию: ", Telegram.Bot.Types.Enums.ParseMode.Default, replyMarkup: reply);
+            await client?.SendTextMessageAsync(chatId, "Выберите интересующую категорию: ", Telegram.Bot.Types.Enums.ParseMode.Default, replyMarkup: reply);
         }
         
 
@@ -51,7 +56,7 @@ namespace CSharpEducationBot
                     if(c.Id == 1)
                     {
                         string t = $"Курс {c.Name} доступен для скачивания по ссылке: {c.Url}";
-                        await client.SendTextMessageAsync(chatId: e.CallbackQuery.Message.Chat.Id, t);
+                        await client?.SendTextMessageAsync(chatId: e.CallbackQuery.Message.Chat.Id, t);
                     }
                 }
                 
@@ -79,12 +84,19 @@ namespace CSharpEducationBot
 
         internal override async void CheckCallBack(string v, CallbackQueryEventArgs e)
         {
+            if (client == null) return;
             switch (v)
             {
                 case "books": await sendBook(e); break;
                 case "kurs": await sendKurs(e); break;
+                case "newFile": await load_fail(e); break;
                 default: break;
             }
+        }
+
+        private async Task load_fail(CallbackQueryEventArgs e)
+        {
+            await client.SendTextMessageAsync(e.CallbackQuery.Message.Chat.Id, "Упс...данная функция еще не реализована. :(", replyToMessageId: 0);
         }
     }
 }
