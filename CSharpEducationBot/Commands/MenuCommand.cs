@@ -47,11 +47,9 @@ namespace CSharpEducationBot.Commands
                     InlineKeyboardButton.WithCallbackData("Поделиться знаниями", "share")
                 }
             });
-
-            await client.SendTextMessageAsync(chatId, MainMenuText, replyMarkup: mainMenu);
+            
             #endregion
-
-
+            
 
             
             switch (inCall)
