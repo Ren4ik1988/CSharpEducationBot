@@ -19,11 +19,31 @@ namespace CSharpEducationBot.Commands
 
         public override async void Execute(Message message, TelegramBotClient client)
         {
+            CSharpEducationBot.Program.log.Trace("Message from clients: {0},   {1}", message.Chat.Username, message.Text);
+
+            #region Главное меню
+            string MainMenuText = "Привет! Данный бот поможет в поиске ресусов по С#. У нас есть видео и книги. Если есть чем поделиться, мы быдем рады.";
+            var mainMenu = new InlineKeyboardMarkup(new[]
+            {
+                new []
+                {
+                    InlineKeyboardButton.WithCallbackData("Видео уроки", "video"),
+                    InlineKeyboardButton.WithCallbackData("Книги", "books"),
+                    InlineKeyboardButton.WithCallbackData("Поделиться знаниями", "share")
+                }
+            });
+
+            await client.SendTextMessageAsync(message.Chat.Id, MainMenuText, replyMarkup: mainMenu);
+
+            #endregion
+
             client.OnCallbackQuery += (object sc, Telegram.Bot.Args.CallbackQueryEventArgs ev) =>
             {
                 ProcessingCall(message, client,ev.CallbackQuery.Data);
                 client.AnswerCallbackQueryAsync(ev.CallbackQuery.Id);
             };
+
+            
         }
 
         /// <summary>
