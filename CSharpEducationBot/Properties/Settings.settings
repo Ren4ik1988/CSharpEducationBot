@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CSharpEducationBot.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="usesocks5" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="socksip" Type="System.String" Scope="User">
+      <Value Profile="(Default)">177.190.74.60</Value>
+    </Setting>
+    <Setting Name="socksport" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">39880</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
