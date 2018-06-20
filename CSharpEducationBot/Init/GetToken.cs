@@ -24,6 +24,7 @@ namespace CSharpEducationBot
             {
                 param.Reload(); // читаем параметры из файла приложения, если этого не делать, то будут настройки по умолчанию (т.е. указанные при создании файла)
 
+
                 // Определяем способ подключения к серверам
                 if (param.usesocks5 && 
                    !String.IsNullOrEmpty(param.socksip)  && param.socksport != 0)
@@ -34,6 +35,9 @@ namespace CSharpEducationBot
                 }
                 else
                     bot = new TelegramBotClient(readToken()); //инициализируем клиент телеграм бота
+
+                bot.Timeout = new TimeSpan(0, 2, 0);
+                
             }
             catch ( ArgumentException ex) // если файл найден, но токен имел неверный формат
             {
